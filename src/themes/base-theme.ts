@@ -1,13 +1,14 @@
 import { ThemeOptions, createTheme } from "@mui/material";
+import { theme } from "../styles/variables";
 
 const baseThemeOptions: ThemeOptions = {
   palette: {
     mode: "light",
     primary: {
-      main: "#d87e0d",
+      main: theme.primaryColor,
     },
     secondary: {
-      main: "#2f2c2c",
+      main: theme.secondaryColor,
     },
   },
 };

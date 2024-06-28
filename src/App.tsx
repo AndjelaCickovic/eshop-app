@@ -1,9 +1,18 @@
 import "./App.css";
-import { ThemeProvider } from "@mui/material/styles";
-import { baseTheme } from "./themes/base-theme";
+import Layout from "./components/layout/Layout";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import routes from "./routes/routes";
 
 function App() {
-  return <ThemeProvider theme={baseTheme}>App works</ThemeProvider>;
+  const router = createBrowserRouter([
+    {
+      element: <Layout />,
+      //TODO: Do we need error page?
+      // errorElement: <Page404 />,
+      children: routes,
+    },
+  ]);
+  return <RouterProvider router={router} />;
 }
 
 export default App;

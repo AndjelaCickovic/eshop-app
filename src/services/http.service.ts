@@ -15,116 +15,89 @@ export interface IErrorResponse {
   message: string;
 }
 
-class HttpService {
-  private http: AxiosInstance;
-  private baseURL = process.env.REACT_APP_API_BASE_URL;
+const setupHeaders = () => {
+  return { "Content-Type": "application/json", Accept: "application/json" };
+};
 
-  constructor() {
-    this.http = axios.create({
-      baseURL: this.baseURL,
-      withCredentials: false,
-      headers: this.setupHeaders(),
-    });
-  }
+const injectInterceptors = (): void => {
+  // Set up response interceptor
+  axiosService.interceptors.response.use(
+    (response) => response,
 
-  // Initialize service configuration
-  public service() {
-    this.injectInterceptors();
-
-    return this;
-  }
-
-  // Set up request headers
-  private setupHeaders() {
-    return { "Content-Type": "application/json" };
-  }
-
-  // Handle HTTP requests
-  private async request<T>(
-    method: HttpMethod,
-    url?: string,
-    options?: AxiosRequestConfig
-  ): Promise<T> {
-    try {
-      const response: AxiosResponse<T> = await this.http.request<T>({
-        method,
-        url,
-        ...options,
-      });
-
-      return response.data;
-    } catch (error) {
-      return this.normalizeError(error);
+    (error) => {
+      //TODO: Error handling
+      // Add method to check errors and toast error from component
+      // Check statuses 400, 404, 500
     }
-  }
+  );
+};
 
-  public async get<T>(url: string, params?: IParams): Promise<T> {
-    return this.request<T>(HttpMethod.GET, url, {
-      params,
-      headers: this.setupHeaders(),
-    });
-  }
+const axiosService: AxiosInstance = axios.create({
+  baseURL: process.env.REACT_APP_API_BASE_URL,
+  withCredentials: false,
+  headers: setupHeaders(),
+});
 
-  public async post<T, P>(
-    url: string,
-    payload: P,
-    params?: IParams
-  ): Promise<T> {
-    return this.request<T>(HttpMethod.POST, url, {
-      params,
-      data: payload,
-      headers: this.setupHeaders(),
-    });
-  }
+injectInterceptors();
 
-  public async update<T, P>(
-    url: string,
-    payload: P,
-    params?: IParams
-  ): Promise<T> {
-    return this.request<T>(HttpMethod.PUT, url, {
-      params,
-      data: payload,
-      headers: this.setupHeaders(),
-    });
-  }
-
-  public async delete<T>(url: string, params?: IParams): Promise<T> {
-    return this.request<T>(HttpMethod.DELETE, url, {
-      params,
-      headers: this.setupHeaders(),
-    });
-  }
-
-  // Inject interceptors for request and response
-  private injectInterceptors() {
-    // Set up request interceptor
-    this.http.interceptors.request.use((request) => {
-      // * Perform an action
-      // TODO: implement an NProgress
-      return request;
+// Handle HTTP requests
+async function request<T>(
+  method: HttpMethod,
+  url?: string,
+  options?: AxiosRequestConfig
+): Promise<T> {
+  try {
+    const response = axiosService.request<T>({
+      method: method,
+      url: url,
+      ...options,
     });
 
-    // Set up response interceptor
-    this.http.interceptors.response.use(
-      (response) => {
-        // * Do something
-        return response;
-      },
+    return (await response).data;
 
-      (error) => {
-        // * Implement a global error alert
-        return Promise.reject(error);
-      }
-    );
-  }
-
-  // Normalize errors
-  private normalizeError(error: any) {
-    return Promise.reject(error);
+    // return response.data;
+  } catch (error) {
+    return normalizeError(error);
   }
 }
 
-const httpService = new HttpService();
+const httpGet = async <T>(url: string, params?: IParams): Promise<T> => {
+  return request<T>(HttpMethod.GET, url, {
+    params,
+  });
+};
 
-export { httpService as default };
+const httpPost = async <T, P>(
+  url: string,
+  payload: P,
+  params?: IParams
+): Promise<T> => {
+  return request<T>(HttpMethod.POST, url, {
+    params,
+    data: payload,
+  });
+};
+
+const httpPut = async <T, P>(
+  url: string,
+  payload: P,
+  params?: IParams
+): Promise<T> => {
+  return request<T>(HttpMethod.PUT, url, {
+    params,
+    data: payload,
+  });
+};
+
+const httpDelete = async <T>(url: string, params?: IParams): Promise<T> => {
+  return request<T>(HttpMethod.DELETE, url, {
+    params,
+  });
+};
+
+// Normalize errors
+const normalizeError = (error: any) => {
+  return Promise.reject(error);
+};
+
+export { httpGet, httpPost, httpPut, httpDelete };
