@@ -1,0 +1,10 @@
+{
+  "shoppingCart": { "title": "Shopping cart", "addBtn": "Add to cart" },
+  "products": {
+    "additionalInformation": "Additional information",
+    "specifications": "Specifications",
+    "features": "Features",
+    "warranty": "Warranty",
+    "inTheBox": "In the box"
+  }
+}

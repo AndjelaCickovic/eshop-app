@@ -8,11 +8,11 @@ export interface Product {
   specifications: Record<string, SpecificationValue>;
 }
 
-type AdditionalInformation = Record<
+export type AdditionalInformation = Record<
   AdditionalInformationKey,
   AdditionalInformationValue
 >;
 
 type AdditionalInformationKey = "Warranty" | "In the Box";
 type AdditionalInformationValue = string | string[];
-type SpecificationValue = string | string[];
+export type SpecificationValue = string | number | string[] | number[];

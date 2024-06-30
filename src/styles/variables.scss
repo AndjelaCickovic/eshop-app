@@ -1,10 +1,20 @@
 :root {
   --primaryColor: #d87e0d;
-  --secondaryColor: #2f2c2c;
-  // --contrastColor:
-  // --success,error,warning
+  --secondaryColor: #716e6e;
+  --primaryDarkColor: #c75805;
+  --primaryLightColor: #e29617;
+  --primaryVeryLightColor: #fbf2e1;
+  --secondaryColor: #5d5a5a;
+  --secondaryDarkColor: #1e1b1b;
+  --secondaryLightColor: #999696;
+  --secondaryVeryLightColor: #f5f2f2;
 
-  // --fontSize -sm, -md, -lg
-  // --fontWeight -normal, -bold, -bolder
-  // --spacing -sm -md -lg
+  --fontSize_sm: 0.8rem;
+  --fontSize_md: 1rem;
+  --fontSize_lg: 1.5rem;
+  --fontSize_xl: 2rem;
+
+  --fontWeight_normal: 400;
+  --fontWeight_semiBold: 600;
+  --fontWeight_bold: 700;
 }

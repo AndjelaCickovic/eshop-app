@@ -1,0 +1,17 @@
+.quantityInput {
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+    width: 30px;
+    text-align: center;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  background-color: var(--primaryVeryLightColor);
+  border: none;
+  border-radius: 30px;
+}

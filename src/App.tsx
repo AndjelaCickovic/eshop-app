@@ -1,4 +1,6 @@
+import "./locales/i18n";
 import "./App.css";
+import "./styles/global.scss";
 import Layout from "./components/layout/Layout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import routes from "./routes/routes";

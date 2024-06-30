@@ -1,1 +1,14 @@
-//TODO: global styles
+// global styles
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.emphasized-text {
+  font-size: var(--fontSize_lg);
+  font-weight: var(--fontWeight_bold);
+  color: var(--primaryColor);
+}

@@ -6,9 +6,13 @@ const baseThemeOptions: ThemeOptions = {
     mode: "light",
     primary: {
       main: theme.primaryColor,
+      light: theme.primaryLightColor,
+      dark: theme.primaryDarkColor,
     },
     secondary: {
       main: theme.secondaryColor,
+      light: theme.secondaryLightColor,
+      dark: theme.secondaryDarkColor,
     },
   },
 };

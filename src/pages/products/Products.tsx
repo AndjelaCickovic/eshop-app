@@ -1,8 +1,8 @@
-import { Grid } from "@mui/material";
-import { useState, useEffect } from "react";
-import ProductCard from "../../components/product-card/ProductCard";
+import { useState, useEffect, useMemo } from "react";
 import productService from "../../services/product.service";
 import { Product } from "../../types";
+import { IProductsContext, ProductsContext } from "../../contexts";
+import { Outlet } from "react-router-dom";
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -28,19 +28,13 @@ export default function Products() {
       });
   }, []);
 
+  const productsValue: IProductsContext = useMemo(() => {
+    return { products };
+  }, [products]);
+
   return (
-    <Grid
-      container
-      rowSpacing={3}
-      justifyContent={"space-between"}
-      alignItems={"center"}
-      margin={"auto"}
-    >
-      {products.map((product) => (
-        <Grid item xs={12} md={6} lg={4} xl={3} key={product.id}>
-          <ProductCard product={product} />
-        </Grid>
-      ))}
-    </Grid>
+    <ProductsContext.Provider value={productsValue}>
+      <Outlet />
+    </ProductsContext.Provider>
   );
 }

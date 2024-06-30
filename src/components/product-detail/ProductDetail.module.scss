@@ -1,0 +1,32 @@
+@import "../../styles/global.scss";
+
+.wrapper {
+  margin: auto;
+}
+
+.imgContainer {
+  max-height: 30rem;
+}
+
+.productImg {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  height: 100%;
+}
+
+.price {
+  @extend .emphasized-text;
+}
+
+.primaryIcon {
+  color: var(--primaryColor);
+}
+
+.bolderText {
+  span {
+    font-weight: var(--fontWeight_semiBold);
+    font-size: 0.9rem;
+    color: rgb(49, 49, 49);
+  }
+}
