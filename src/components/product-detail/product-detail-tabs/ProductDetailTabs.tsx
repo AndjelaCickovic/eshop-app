@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Table,
   Paper,
@@ -7,15 +9,14 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import { AdditionalInformation, SpecificationValue } from "../../../types";
-import { useTranslation } from "react-i18next";
-import { joinValues } from "../../../util/value-formatters.util";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import { SpecificationValue } from "../../../types";
+import { joinValues } from "../../../util/value-formatters.util";
+import styles from "./ProductDetailTabs.module.scss";
 
 export enum ProductDetailsTab {
   Specifications = "specifications",
@@ -24,7 +25,6 @@ export enum ProductDetailsTab {
 }
 
 export interface ProductDetailTabsProps {
-  additionalInformation?: AdditionalInformation;
   specifications?: Record<string, SpecificationValue>;
   features?: string[];
   defaultTab?: ProductDetailsTab;
@@ -34,14 +34,13 @@ export default function ProductDetailTabs(
   props: Readonly<ProductDetailTabsProps>
 ) {
   const {
-    additionalInformation,
     specifications,
     features,
-    defaultTab = ProductDetailsTab.Specifications,
+    defaultTab = ProductDetailsTab.Features,
   } = props;
 
   const { t } = useTranslation();
-  const [value, setValue] = useState(ProductDetailsTab.Specifications);
+  const [value, setValue] = useState(defaultTab);
 
   const handleChange = (
     _event: React.SyntheticEvent,
@@ -51,20 +50,25 @@ export default function ProductDetailTabs(
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box className={styles.fullWidth}>
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box className={styles.headingBox}>
           <TabList onChange={handleChange}>
-            <Tab
-              label={t("products.specifications")}
-              value={ProductDetailsTab.Specifications}
-            />
             <Tab
               label={t("products.features")}
               value={ProductDetailsTab.Features}
             />
+            <Tab
+              label={t("products.specifications")}
+              value={ProductDetailsTab.Specifications}
+            />
           </TabList>
         </Box>
+        <TabPanel value={ProductDetailsTab.Features}>
+          {features?.map((f) => (
+            <Typography key={f}>{f}</Typography>
+          ))}
+        </TabPanel>
         <TabPanel value={ProductDetailsTab.Specifications}>
           <TableContainer sx={{ width: "fit-content" }} component={Paper}>
             <Table>
@@ -92,11 +96,6 @@ export default function ProductDetailTabs(
               </TableBody>
             </Table>
           </TableContainer>
-        </TabPanel>
-        <TabPanel value={ProductDetailsTab.Features}>
-          {props.features?.map((f) => (
-            <Typography>{f}</Typography>
-          ))}
         </TabPanel>
       </TabContext>
     </Box>

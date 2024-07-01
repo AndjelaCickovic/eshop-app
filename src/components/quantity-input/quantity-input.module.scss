@@ -1,17 +1,25 @@
+$inputWidth: 42px;
+$inputBorderRadius: 32px;
+
 .quantityInput {
+  background-color: var(--primaryVeryLightColor);
+  border: none;
+  border-radius: $inputBorderRadius;
+
   input[type="number"] {
     -moz-appearance: textfield;
     appearance: textfield;
-    width: 30px;
+    width: $inputWidth;
     text-align: center;
+    align-self: center;
+    padding: 0;
   }
 
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
-
-  background-color: var(--primaryVeryLightColor);
-  border: none;
-  border-radius: 30px;
+}
+.icon {
+  font-size: var(--fontSize_md);
 }

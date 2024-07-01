@@ -1,10 +1,23 @@
 {
-  "shoppingCart": { "title": "Shopping cart", "addBtn": "Add to cart" },
+  "shoppingCart": {
+    "title": "Shopping cart",
+    "addBtn": "Add to cart",
+    "emptyCartText": "No items found in shopping cart.",
+    "totalLabel": "Total",
+    "removeBtn_one": "Remove item from cart",
+    "removeBtn_other": "Remove items from cart"
+  },
+
   "products": {
     "additionalInformation": "Additional information",
     "specifications": "Specifications",
     "features": "Features",
     "warranty": "Warranty",
     "inTheBox": "In the box"
+  },
+
+  "quantity": {
+    "increaseBtn": "Increase quantity",
+    "decreaseBtn": "Decrease quantity"
   }
 }

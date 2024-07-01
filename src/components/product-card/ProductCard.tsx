@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import {
   Card,
@@ -7,12 +9,12 @@ import {
   Typography,
   CardActions,
   Stack,
+  CardActionArea,
 } from "@mui/material";
 import { Product } from "../../types";
-import styles from "./ProductCard.module.scss";
-import { useCallback } from "react";
-import { useTranslation } from "react-i18next";
 import { LocalizedNumber } from "../localized-number/LocalizedNumber";
+import { useCart } from "../../contexts";
+import styles from "./ProductCard.module.scss";
 
 interface ProductCardProps {
   product: Product;
@@ -23,61 +25,69 @@ export default function ProductCard(props: Readonly<ProductCardProps>) {
   const { product, onClick } = props;
 
   const { t } = useTranslation();
+  const { addToCart } = useCart();
 
-  const handleClick = useCallback(
+  const handleCardClick = useCallback(
     (_event: React.MouseEvent<HTMLDivElement>) => {
       onClick(product.id);
     },
     [onClick, product.id]
   );
+
+  const handleAddToCartClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      addToCart(product);
+    },
+    [addToCart, product]
+  );
+
   return (
-    // TODO Styling
-    <Card
-      sx={{ maxWidth: 345 }}
-      className={styles["product-card"]}
-      onClick={handleClick}
-    >
-      <CardMedia
-        component="img"
-        height="194"
-        image="https://m.media-amazon.com/images/I/71KtWe8b3JL._AC_SL1500_.jpg"
-        alt={props.product.name}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {product.name}
-        </Typography>
-        <Typography
-          variant="body2"
-          textOverflow={"ellipsis"}
-          overflow={"hidden"}
-          whiteSpace={"nowrap"}
-          color="text.secondary"
-        >
-          {product.description}
-        </Typography>
-      </CardContent>
-      <CardActions dir="ltr">
-        <Stack
-          display={"flex"}
-          width={"100%"}
-          direction={"row"}
-          alignItems={"center"}
-          justifyContent={"space-between"}
-        >
-          <LocalizedNumber
-            formatStyle="currency"
-            value={product?.price}
-          ></LocalizedNumber>
-          <IconButton
-            aria-label={t("shoppingCart.addBtn")}
-            title={t("shoppingCart.addBtn")}
-            color="primary"
+    <Card className={styles.productCard} onClick={handleCardClick}>
+      <CardActionArea disableTouchRipple>
+        <CardMedia
+          component="img"
+          className={styles.img}
+          image="https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
+          alt={props.product.name}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5">
+            {product.name}
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            textOverflow={"ellipsis"}
+            overflow={"hidden"}
+            whiteSpace={"nowrap"}
           >
-            <AddShoppingCartIcon />
-          </IconButton>
-        </Stack>
-      </CardActions>
+            {product.description}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Stack
+            display={"flex"}
+            width={"100%"}
+            direction={"row"}
+            alignItems={"center"}
+            justifyContent={"space-between"}
+          >
+            <LocalizedNumber
+              formatStyle="currency"
+              value={product?.price}
+              className={styles.price}
+            ></LocalizedNumber>
+            <IconButton
+              aria-label={t("shoppingCart.addBtn")}
+              title={t("shoppingCart.addBtn")}
+              color="primary"
+              onClick={handleAddToCartClick}
+            >
+              <AddShoppingCartIcon />
+            </IconButton>
+          </Stack>
+        </CardActions>
+      </CardActionArea>
     </Card>
   );
 }

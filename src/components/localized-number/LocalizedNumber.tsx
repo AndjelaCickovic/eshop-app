@@ -1,14 +1,17 @@
+import { BaseHTMLAttributes } from "react";
 import i18next from "i18next";
-import React, { BaseHTMLAttributes } from "react";
 
 /**
  * style is omitted from Intl.NumberFormatOptions and renamed to formatStyle to prevent a clash with the
- * BaseHTMLAttributes "style" (which would be the CSS style object)
+ * BaseHTMLAttributes "style" (which would be the CSS style object). Default currency is USD.
  */
 export interface LocalizedNumberProps
   extends BaseHTMLAttributes<HTMLSpanElement>,
     Omit<Intl.NumberFormatOptions, "style"> {
   formatStyle?: string;
+  /**
+   * @default i18next.language
+   */
   locale?: string;
   value?: number;
 }
@@ -19,7 +22,7 @@ export function LocalizedNumber(props: Readonly<LocalizedNumberProps>) {
     currencySign,
     useGrouping,
     minimumIntegerDigits,
-    minimumFractionDigits,
+    minimumFractionDigits = 2,
     maximumFractionDigits = 2,
     minimumSignificantDigits,
     maximumSignificantDigits,
@@ -28,14 +31,15 @@ export function LocalizedNumber(props: Readonly<LocalizedNumberProps>) {
     value,
     ...rest
   } = props;
+
   const numberFormatter = new Intl.NumberFormat(locale, {
     style: formatStyle,
     currency: "USD",
     currencySign,
     useGrouping,
     minimumIntegerDigits,
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    minimumFractionDigits,
+    maximumFractionDigits,
     minimumSignificantDigits,
     maximumSignificantDigits,
   });

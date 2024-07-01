@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
+import { Outlet } from "react-router-dom";
 import productService from "../../services/product.service";
 import { Product } from "../../types";
 import { IProductsContext, ProductsContext } from "../../contexts";
-import { Outlet } from "react-router-dom";
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);

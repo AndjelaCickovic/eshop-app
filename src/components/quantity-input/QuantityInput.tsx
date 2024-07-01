@@ -1,24 +1,29 @@
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import { IconButton, Input, Stack, TextField } from "@mui/material";
-import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { IconButton, Input, Stack } from "@mui/material";
 import styles from "./quantity-input.module.scss";
 
 export interface QuantityInputProps {
-  min?: number;
-  max?: number;
   /**
-   * Initial value for input
    * @default 0
    */
   initialValue?: number;
+  /**
+   * @default 0
+   */
+  min?: number;
+  max?: number;
   onChange?: (value: number) => void;
 }
 
 export default function QuantityInput(props: Readonly<QuantityInputProps>) {
-  const { initialValue, min = 0, max, onChange } = props;
+  const { initialValue = 1, min = 1, max, onChange } = props;
 
-  const [quantity, setQuantity] = useState<number>(initialValue ?? 0);
+  const [quantity, setQuantity] = useState<number>(initialValue);
+
+  const { t } = useTranslation();
 
   const valueMatchesBounds = useCallback(
     (value: number) => {
@@ -54,24 +59,31 @@ export default function QuantityInput(props: Readonly<QuantityInputProps>) {
 
   const decreaseBtn = useMemo(() => {
     return (
-      <IconButton onClick={handleDecrement} disabled={quantity === min}>
-        <RemoveIcon fontSize="small" />
+      <IconButton
+        onClick={handleDecrement}
+        disabled={quantity === min}
+        title={t("quantity.decreaseBtn")}
+      >
+        <RemoveIcon className={styles.icon} />
       </IconButton>
     );
-  }, [handleDecrement, min, quantity]);
+  }, [handleDecrement, min, quantity, t]);
 
   const increaseBtn = useMemo(() => {
     return (
-      <IconButton onClick={handleIncrement} disabled={quantity === max}>
-        <AddIcon fontSize="small" />
+      <IconButton
+        onClick={handleIncrement}
+        disabled={quantity === max}
+        title={t("quantity.increaseBtn")}
+      >
+        <AddIcon className={styles.icon} />
       </IconButton>
     );
-  }, [handleIncrement, max, quantity]);
+  }, [handleIncrement, max, quantity, t]);
 
   return (
     <Stack direction={"row"} display={"flex"} alignItems={"center"}>
       <Input
-        //variant="outlined"
         size="small"
         type="number"
         value={quantity}

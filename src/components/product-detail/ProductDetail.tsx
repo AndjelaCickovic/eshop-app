@@ -1,37 +1,40 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useProducts } from "../../contexts";
-import { useEffect, useMemo } from "react";
-import PathConstants from "../../routes/path-constants";
 import {
   Box,
   Button,
-  Card,
   Divider,
   Grid,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  Stack,
   Typography,
 } from "@mui/material";
-import styles from "./ProductDetail.module.scss";
+import {
+  Inventory2Outlined,
+  ShoppingBagOutlined,
+  VerifiedOutlined,
+} from "@mui/icons-material";
+import { useCart, useProducts } from "../../contexts";
+import PathConstants from "../../routes/path-constants";
 import { useTranslation } from "react-i18next";
 import { LocalizedNumber } from "../localized-number/LocalizedNumber";
 import QuantityInput from "../quantity-input/QuantityInput";
 import ProductDetailTabs from "./product-detail-tabs/ProductDetailTabs";
-import {
-  Inventory2Outlined,
-  InventoryOutlined,
-  VerifiedOutlined,
-} from "@mui/icons-material";
 import { joinValues } from "../../util/value-formatters.util";
+import styles from "./ProductDetail.module.scss";
 
 export default function ProductDetail() {
   const { t } = useTranslation();
 
   const { products } = useProducts();
+  const { addToCart } = useCart();
   const { productId } = useParams();
   const navigate = useNavigate();
+
+  const [productQuantity, setProductQuantity] = useState<number>(1);
 
   const product = useMemo(() => {
     return productId ? products.find((p) => p.id === +productId) : undefined;
@@ -42,6 +45,14 @@ export default function ProductDetail() {
       navigate(PathConstants.Products);
     }
   }, [navigate, product]);
+
+  const handleAddToCartClick = useCallback(() => {
+    addToCart(product!, productQuantity);
+  }, [addToCart, product, productQuantity]);
+
+  const handleQuantityChange = useCallback((value: number) => {
+    setProductQuantity(value);
+  }, []);
 
   return (
     <Grid
@@ -66,29 +77,37 @@ export default function ProductDetail() {
           <img
             alt="Product"
             className={styles.productImg}
-            src="https://m.media-amazon.com/images/I/71KtWe8b3JL._AC_SL1500_.jpg"
+            src="https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
           />
         </Grid>
         <Grid xs={4} item display={"flex"} flexDirection={"column"} gap={4}>
           <Box gap={1}>
             <Typography variant="h5">{product?.name}</Typography>
-            <Typography
-              variant="subtitle2"
-              color="text.secondary"
-              textAlign={"justify"}
-            >
+            <Typography variant="subtitle1" textAlign={"justify"}>
               {product?.description}
             </Typography>
           </Box>
-          <Typography>
+          <Stack
+            direction={"row"}
+            alignItems={"center"}
+            justifyContent={"space-between"}
+          >
             <LocalizedNumber
               formatStyle="currency"
               value={product?.price}
               className={styles.price}
             />
-          </Typography>
-          <QuantityInput />
-          <Button variant="contained" fullWidth={false}>
+            <QuantityInput
+              onChange={handleQuantityChange}
+              initialValue={productQuantity}
+            />
+          </Stack>
+          <Button
+            variant="contained"
+            onClick={handleAddToCartClick}
+            disabled={productQuantity === 0}
+            startIcon={<ShoppingBagOutlined />}
+          >
             {t("shoppingCart.addBtn")}
           </Button>
 
@@ -138,7 +157,6 @@ export default function ProductDetail() {
       </Grid>
       <Grid xs={12} item display={"flex"}>
         <ProductDetailTabs
-          additionalInformation={product?.additionalInformation}
           specifications={product?.specifications}
           features={product?.features}
         />

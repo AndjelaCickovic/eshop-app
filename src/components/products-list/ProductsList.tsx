@@ -1,8 +1,8 @@
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 import ProductCard from "../../components/product-card/ProductCard";
 import { useProducts } from "../../contexts";
-import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import PathConstants from "../../routes/path-constants";
 
 export default function ProductsList() {

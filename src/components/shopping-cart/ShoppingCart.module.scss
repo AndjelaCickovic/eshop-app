@@ -1,0 +1,25 @@
+$drawerMinWidth: 480px;
+
+.fullHeight {
+  height: 100%;
+}
+
+.container {
+  @extend .fullHeight;
+  min-width: $drawerMinWidth;
+}
+
+.title {
+  flex-grow: 1;
+  padding: 16px;
+}
+
+.itemsContainer {
+  @extend .fullHeight;
+  padding: 16px;
+}
+
+.cartIcon {
+  font-size: var(--fontSize_xl);
+  color: var(--primaryColor);
+}
