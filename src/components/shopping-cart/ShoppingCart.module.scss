@@ -7,6 +7,7 @@ $drawerMinWidth: 480px;
 .container {
   @extend .fullHeight;
   min-width: $drawerMinWidth;
+  max-width: 100vw;
 }
 
 .title {
@@ -22,4 +23,10 @@ $drawerMinWidth: 480px;
 .cartIcon {
   font-size: var(--fontSize_xl);
   color: var(--primaryColor);
+}
+
+@media (max-width: 600px) {
+  .container {
+    min-width: 100vw;
+  }
 }

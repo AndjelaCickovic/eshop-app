@@ -7,10 +7,9 @@ export interface LinkProps {
   path: To;
 }
 
-//TODO: Set all props as readonly
 export default function Link(props: Readonly<LinkProps>) {
   return (
-    <RouterLink to={props.path} className={styles["link"]}>
+    <RouterLink to={props.path} className={styles.link}>
       <Typography variant="h6">{props.text}</Typography>
     </RouterLink>
   );

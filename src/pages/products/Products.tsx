@@ -1,40 +1,45 @@
-import { useState, useEffect, useMemo } from "react";
-import { Outlet } from "react-router-dom";
-import productService from "../../services/product.service";
-import { Product } from "../../types";
-import { IProductsContext, ProductsContext } from "../../contexts";
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { Grid } from "@mui/material";
+import { useProducts } from "../../contexts";
+import ProductCard from "../../components/product-card/ProductCard";
+import PathConstants from "../../routes/path-constants";
+import styles from "./Products.module.scss";
+import { ProductCardSkeleton } from "../../components/product-card/product-card-skeleton/ProductCardSkeleton";
 
 export default function Products() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
+  const { products, loading } = useProducts();
 
-  useEffect(() => {
-    let isBackendApiCall = true;
-    setLoading(true);
-    productService
-      .getProducts()
-      .then((data) => {
-        if (isBackendApiCall) {
-          setProducts(data);
-          setLoading(false);
-          isBackendApiCall = false;
-        }
-      })
-      .catch(() => {
-        setLoading(false);
-        setError(true);
-        isBackendApiCall = false;
-      });
-  }, []);
+  const navigate = useNavigate();
 
-  const productsValue: IProductsContext = useMemo(() => {
-    return { products };
-  }, [products]);
+  const handleClick = useCallback(
+    (id: number) => {
+      navigate(
+        PathConstants.ProductDetails.replace(":productId", id.toString())
+      );
+    },
+    [navigate]
+  );
 
   return (
-    <ProductsContext.Provider value={productsValue}>
-      <Outlet />
-    </ProductsContext.Provider>
+    <Grid
+      container
+      spacing={4}
+      justifyContent={{ xs: "center", md: "space-between" }}
+      alignItems={"center"}
+      className={styles.grid}
+    >
+      {!loading
+        ? products.map((product) => (
+            <Grid item xs={12} md={6} lg={4} xl={3} key={product.id}>
+              <ProductCard product={product} onClick={handleClick} />
+            </Grid>
+          ))
+        : [1, 2, 3, 4, 5, 6].map((v) => (
+            <Grid item xs={12} md={6} lg={4} xl={3} key={v}>
+              <ProductCardSkeleton />
+            </Grid>
+          ))}
+    </Grid>
   );
 }

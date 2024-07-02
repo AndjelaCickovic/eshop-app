@@ -4,7 +4,6 @@ import "./styles/global.scss";
 import Layout from "./components/layout/Layout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import routes from "./routes/routes";
-
 function App() {
   const router = createBrowserRouter([
     {

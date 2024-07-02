@@ -13,7 +13,7 @@ export const theme: ITheme = {
   disabledTextColor: "#C2C2C2",
 
   /**Font sizes */
-  fontSize_sm: "0.8rem",
+  fontSize_sm: "0.9rem",
   fontSize_md: "1rem",
   fontSize_lg: "1.5rem",
   fontSize_xl: "2rem",
@@ -26,6 +26,19 @@ export const theme: ITheme = {
   margin_lg: "4rem",
   margin_xl: "8rem",
   margin_xxl: "12rem",
+
+  /**Breakpoints */
+  xs: 0,
+  sm: 600,
+  md: 900,
+  lg: 1200,
+  xl: 1536,
+
+  boxShadow_sm: "0px 1px 2px 0px rgba(28, 39, 49, 0.08)",
+  boxShadow_md:
+    "0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12)",
+  boxShadow_lg:
+    "0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12)",
 };
 
 interface ITheme {
@@ -56,4 +69,14 @@ interface ITheme {
   margin_lg: string;
   margin_xl: string;
   margin_xxl: string;
+
+  xs: number;
+  sm: number;
+  md: number;
+  lg: number;
+  xl: number;
+
+  boxShadow_sm: string;
+  boxShadow_md: string;
+  boxShadow_lg: string;
 }

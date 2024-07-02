@@ -8,6 +8,8 @@ import {
   TableCell,
   TableRow,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
@@ -39,8 +41,12 @@ export default function ProductDetailTabs(
     defaultTab = ProductDetailsTab.Features,
   } = props;
 
-  const { t } = useTranslation();
   const [value, setValue] = useState(defaultTab);
+
+  const theme = useTheme();
+  const isSmOrMd = useMediaQuery(theme.breakpoints.down("md"));
+
+  const { t } = useTranslation();
 
   const handleChange = (
     _event: React.SyntheticEvent,
@@ -53,7 +59,7 @@ export default function ProductDetailTabs(
     <Box className={styles.fullWidth}>
       <TabContext value={value}>
         <Box className={styles.headingBox}>
-          <TabList onChange={handleChange}>
+          <TabList onChange={handleChange} centered={isSmOrMd}>
             <Tab
               label={t("products.features")}
               value={ProductDetailsTab.Features}
@@ -66,36 +72,31 @@ export default function ProductDetailTabs(
         </Box>
         <TabPanel value={ProductDetailsTab.Features}>
           {features?.map((f) => (
-            <Typography key={f}>{f}</Typography>
+            <Typography key={f} className={styles.justifiedText}>
+              {f}
+            </Typography>
           ))}
         </TabPanel>
         <TabPanel value={ProductDetailsTab.Specifications}>
-          <TableContainer sx={{ width: "fit-content" }} component={Paper}>
-            <Table>
-              <TableBody>
-                {specifications &&
-                  Object.keys(specifications).map((specification) => (
-                    <TableRow
-                      key={specification}
-                      sx={{
-                        "&:last-child td, &:last-child th": { border: 0 },
-                      }}
-                    >
-                      <TableCell
-                        component="th"
-                        scope="row"
-                        sx={{ fontWeight: "bolder" }}
-                      >
-                        {specification.concat(":")}
-                      </TableCell>
-                      <TableCell>
-                        {joinValues(specifications[specification])}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <Box className={styles.tableContainer}>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableBody>
+                  {specifications &&
+                    Object.keys(specifications).map((specification) => (
+                      <TableRow key={specification} className={styles.tableRow}>
+                        <TableCell className={styles.tableHead}>
+                          {specification.concat(":")}
+                        </TableCell>
+                        <TableCell>
+                          {joinValues(specifications[specification])}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
         </TabPanel>
       </TabContext>
     </Box>

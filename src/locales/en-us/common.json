@@ -19,5 +19,9 @@
   "quantity": {
     "increaseBtn": "Increase quantity",
     "decreaseBtn": "Decrease quantity"
+  },
+
+  "shared": {
+    "loading": "Loading"
   }
 }

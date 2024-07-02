@@ -1,17 +1,20 @@
+@import url(../node_modules/normalize.css/normalize.css);
 @import url(../src/styles/variables.scss);
+
+html {
+  font-size: 16px; /*for using REM units*/
+}
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-size: var(--fontSize_md);
+  font-weight: var(--fontWeight_normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-width: 350px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-/* TODO install normalize */

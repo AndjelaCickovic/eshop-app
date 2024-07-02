@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import ShoppingCartContext, {
   IShoppingCartContext,
-} from "./shopping-cart.context";
+} from "./ShoppingCartContext";
 import { CartItem, Product } from "../../types";
-import CartDrawerContext from "./shopping-cart-drawer.context";
+import CartDrawerContext from "./ShoppingCartDrawerContext";
 import shoppingCartService from "../../services/shopping-cart.service";
 
 export function ShoppingCartProvider(props: Readonly<React.PropsWithChildren>) {

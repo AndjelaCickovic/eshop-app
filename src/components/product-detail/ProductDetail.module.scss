@@ -1,18 +1,23 @@
 @import "../../styles/global.scss";
 
+$imgContainerMaxHeight: 30rem;
+
 .wrapper {
   margin: auto;
 }
 
 .imgContainer {
-  max-height: 30rem;
+  max-height: $imgContainerMaxHeight;
+}
+
+.fullWidth {
+  width: 100%;
 }
 
 .productImg {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
+  @extend .fullWidth;
   height: 100%;
+  object-fit: contain;
 }
 
 .price {
@@ -24,9 +29,11 @@
 }
 
 .bolderText {
-  span {
-    font-weight: var(--fontWeight_semiBold);
-    font-size: 0.9rem;
-    color: rgb(49, 49, 49);
-  }
+  font-weight: var(--fontWeight_semiBold);
+  font-size: var(--fontSize_sm);
+}
+
+.indentedList {
+  margin-top: var(--margin_sm);
+  padding-left: 2rem;
 }

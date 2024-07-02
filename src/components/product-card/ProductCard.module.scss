@@ -1,10 +1,12 @@
 @import "../../styles/global.scss";
 
+$cardMinWidth: 150px;
 $cardMaxWidth: 350px;
 $imgHeight: 180px;
 
 .productCard {
   max-width: $cardMaxWidth;
+  min-width: $cardMinWidth;
 }
 
 .img {

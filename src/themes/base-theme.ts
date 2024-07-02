@@ -45,9 +45,28 @@ const baseThemeOptions: ThemeOptions = {
     },
     subtitle1: {
       color: theme.secondaryTextColor,
+      fontSize: theme.fontSize_md,
     },
     subtitle2: {
       color: theme.secondaryTextColor,
+      fontSize: theme.fontSize_sm,
+    },
+    body1: {
+      color: theme.primaryTextColor,
+      fontSize: theme.fontSize_md,
+    },
+    body2: {
+      color: theme.primaryTextColor,
+      fontSize: theme.fontSize_sm,
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: theme.xs,
+      sm: theme.sm,
+      md: theme.md,
+      lg: theme.lg,
+      xl: theme.xl,
     },
   },
   components: {
@@ -63,6 +82,15 @@ const baseThemeOptions: ThemeOptions = {
         root: {
           color: "white",
         },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: () => ({
+          ":hover": {
+            boxShadow: theme.boxShadow_lg,
+          },
+        }),
       },
     },
   },

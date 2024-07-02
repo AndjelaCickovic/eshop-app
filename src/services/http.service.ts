@@ -1,4 +1,9 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from "axios";
+import axios, {
+  AxiosInstance,
+  AxiosResponse,
+  AxiosRequestConfig,
+  AxiosError,
+} from "axios";
 import { HttpMethod } from "../types";
 
 export interface IParams {
@@ -24,10 +29,28 @@ const injectInterceptors = (): void => {
   axiosService.interceptors.response.use(
     (response) => response,
 
-    (error) => {
+    (error: AxiosError) => {
       //TODO: Error handling
       // Add method to check errors and toast error from component
-      // Check statuses 400, 404, 500
+      const { status } = error.response!;
+      switch (status) {
+        case 400:
+          console.error(error.response);
+          break;
+        case 401:
+          console.error("Unauthorized");
+          break;
+        case 404:
+          console.error(error.response?.status);
+          break;
+        case 500:
+          console.error("server error");
+          break;
+        default:
+          console.error("an unknown error occurred");
+          break;
+      }
+      return Promise.reject(error);
     }
   );
 };

@@ -1,0 +1,22 @@
+$cardWidth: 350px;
+$cardHeight: 300px;
+$imageHeight: 190px;
+
+.card {
+  width: $cardWidth;
+  height: $cardHeight;
+}
+
+.imgPlaceholder {
+  min-height: $imageHeight;
+  margin-bottom: var(--margin_sm);
+}
+
+.textPlaceholder {
+  height: 10px;
+}
+
+.shorterText {
+  @extend .textPlaceholder;
+  width: 70%;
+}

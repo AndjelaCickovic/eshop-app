@@ -6,28 +6,31 @@ import { Navbar } from "../navbar/Navbar";
 import { ShoppingCart } from "../shopping-cart/ShoppingCart";
 import { ShoppingCartProvider } from "../../contexts";
 import styles from "./Layout.module.scss";
+import ProductsProvider from "../../contexts/products/ProductsContextProvider";
 
 export default function Layout() {
   return (
     <ThemeProvider theme={baseTheme}>
-      <ShoppingCartProvider>
-        <Navbar />
-        <main>
-          <Grid
-            className={styles.container}
-            display={"flex"}
-            flexDirection={"column"}
-            alignItems={"center"}
-            justifyContent={"center"}
-          >
-            {/* TODO Loading component */}
-            <Suspense fallback={<div>Loading...</div>}>
-              <Outlet />
-            </Suspense>
-          </Grid>
-        </main>
-        <ShoppingCart />
-      </ShoppingCartProvider>
+      <ProductsProvider>
+        <ShoppingCartProvider>
+          <Navbar />
+          <main>
+            <Grid
+              className={styles.container}
+              display={"flex"}
+              flexDirection={"column"}
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
+              {/* TODO Loading component */}
+              <Suspense fallback={<div>Loading...</div>}>
+                <Outlet />
+              </Suspense>
+            </Grid>
+          </main>
+          <ShoppingCart />
+        </ShoppingCartProvider>
+      </ProductsProvider>
       {/* TODO Add footer*/}
     </ThemeProvider>
   );
