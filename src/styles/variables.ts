@@ -28,6 +28,8 @@ export const theme: ITheme = {
   margin_xl: "8rem",
   margin_xxl: "12rem",
 
+  p_md: "1rem",
+
   /**Breakpoints */
   xs: 0,
   sm: 600,
@@ -40,6 +42,10 @@ export const theme: ITheme = {
     "0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12)",
   boxShadow_lg:
     "0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12)",
+
+  cardMinWidth: "9.375rem",
+  cardMaxWidth: "21.875rem",
+  cardImgHeight: "11.25rem",
 };
 
 interface ITheme {
@@ -72,6 +78,8 @@ interface ITheme {
   margin_xl: string;
   margin_xxl: string;
 
+  p_md: string;
+
   xs: number;
   sm: number;
   md: number;
@@ -81,4 +89,8 @@ interface ITheme {
   boxShadow_sm: string;
   boxShadow_md: string;
   boxShadow_lg: string;
+
+  cardMinWidth: string;
+  cardMaxWidth: string;
+  cardImgHeight: string;
 }

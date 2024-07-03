@@ -1,5 +1,3 @@
-// global styles
-
 * {
   margin: 0px;
   padding: 0px;
@@ -7,10 +5,44 @@
     "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
+html {
+  font-size: 16px; /*for using REM units*/
+}
+
+body {
+  margin: 0;
+  font-size: var(--fontSize_md);
+  font-weight: var(--fontWeight_normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-width: 22rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.textJustify {
+  text-align: justify;
+}
+
 .emphasizedText {
-  font-size: var(--fontSize_lg);
   font-weight: var(--fontWeight_bold);
   color: var(--primaryColor);
+}
+
+.emphasizedText_lg {
+  @extend .emphasizedText;
+  font-size: var(--fontSize_lg);
+}
+
+.emphasizedText_xl {
+  @extend .emphasizedText;
+  font-size: var(--fontSize_xl);
 }
 
 @mixin clamp-text($linesCount: 2) {

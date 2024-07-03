@@ -2,10 +2,6 @@
   border-bottom: 1px solid var(--dividerColor);
 }
 
-.fullWidth {
-  width: 100%;
-}
-
 .tableContainer {
   width: fit-content;
 }
@@ -17,6 +13,7 @@
   }
 }
 
-.justifiedText {
-  text-align: justify;
+.textJustify {
+  // text-align: justify;
+  composes: textJustify from global;
 }

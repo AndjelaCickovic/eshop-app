@@ -1,28 +1,15 @@
 @import "../../styles/global.scss";
 
-$cardMinWidth: 9.375rem;
-$cardMaxWidth: 21.875rem;
-$imgHeight: 11.25rem;
-
-.productCard {
-  max-width: $cardMaxWidth;
-  min-width: $cardMinWidth;
-}
-
-.MuiCardMedia-root {
-  object-fit: contain;
-}
-
 .actionArea {
-  padding: 1rem;
+  padding: var(--p_md);
   img {
-    height: $imgHeight;
-    object-fit: contain; //TODO
+    height: var(--cardImgHeight);
+    object-fit: contain;
   }
 }
 
 .price {
-  @extend .emphasizedText;
+  @extend .emphasizedText_lg;
 }
 
 .clampedText {

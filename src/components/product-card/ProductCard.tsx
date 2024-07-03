@@ -29,7 +29,7 @@ export function ProductCard(props: Readonly<ProductCardProps>) {
   );
 
   return (
-    <Card className={styles.productCard} onClick={handleCardClick}>
+    <Card onClick={handleCardClick}>
       <CardActionArea
         disableTouchRipple
         className={styles.actionArea}

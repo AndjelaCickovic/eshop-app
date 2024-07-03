@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Inventory2Outlined, VerifiedOutlined } from "@mui/icons-material";
-import { AdditionalInformation } from "../../../types";
+import { AdditionalInformation } from "../../types";
 import styles from "./ProductDetailAdditionalInformation.module.scss";
 
 interface ProductDetailAdditionalInformationProps {

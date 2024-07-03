@@ -90,6 +90,8 @@ const baseThemeOptions: ThemeOptions = {
     MuiCard: {
       styleOverrides: {
         root: () => ({
+          minWidth: theme.cardMinWidth,
+          maxWidth: theme.cardMaxWidth,
           ":hover": {
             boxShadow: theme.boxShadow_lg,
           },

@@ -1,5 +1,5 @@
 .fullWidth {
-  width: 100%;
+  composes: fullWidth from global;
 }
 
 .primaryIcon {

@@ -16,8 +16,8 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { SpecificationValue } from "../../../types";
-import { joinValues } from "../../../util/value-formatters.util";
+import { SpecificationValue } from "../../types";
+import { joinValues } from "../../util/value-formatters.util";
 import styles from "./ProductDetailTabs.module.scss";
 
 export enum ProductDetailsTab {
@@ -53,7 +53,7 @@ export function ProductDetailTabs(props: Readonly<ProductDetailTabsProps>) {
   };
 
   return (
-    <Box className={styles.fullWidth}>
+    <Box>
       <TabContext value={value}>
         <Box className={styles.headingBox}>
           <TabList
@@ -72,7 +72,7 @@ export function ProductDetailTabs(props: Readonly<ProductDetailTabsProps>) {
         </Box>
         <TabPanel value={ProductDetailsTab.Features}>
           {features?.map((f) => (
-            <Typography key={f} className={styles.justifiedText}>
+            <Typography key={f} className={styles.textJustify}>
               {f}
             </Typography>
           ))}

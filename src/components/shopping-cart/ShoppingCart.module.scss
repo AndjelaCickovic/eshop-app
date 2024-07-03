@@ -1,5 +1,4 @@
 $drawerMinWidth: 30rem;
-$padding: 16px;
 
 .fullHeight {
   height: 100%;
@@ -13,12 +12,12 @@ $padding: 16px;
 
 .title {
   flex-grow: 1;
-  padding: $padding;
+  padding: var(--p_md);
 }
 
 .itemsContainer {
   @extend .fullHeight;
-  padding: $padding;
+  padding: var(--p_md);
 }
 
 .cartIcon {

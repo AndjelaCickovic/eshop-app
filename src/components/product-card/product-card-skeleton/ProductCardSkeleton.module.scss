@@ -1,16 +1,5 @@
-@import "../ProductCard.module.scss";
-
-$cardWidth: 9.375rem;
-$cardHeight: 21.875rem;
-$imgHeight: 11.25rem;
-
-.card {
-  width: $cardWidth;
-  height: $cardHeight;
-}
-
 .imgPlaceholder {
-  min-height: $imgHeight;
+  min-height: var(--cardImgHeight);
   margin-bottom: var(--margin_sm);
 }
 

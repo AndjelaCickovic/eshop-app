@@ -6,5 +6,5 @@ export * from "./localized-number/LocalizedNumber";
 export * from "./navbar/Navbar";
 export * from "./product-card/ProductCard";
 export * from "./product-card/product-card-skeleton/ProductCardSkeleton";
-export * from "./product-detail/ProductDetail";
+export * from "../pages/product-detail/ProductDetail";
 export * from "./shopping-cart/ShoppingCart";

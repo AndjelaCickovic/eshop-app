@@ -1,9 +1,7 @@
-@import "../../styles/global.scss";
-
 $imgContainerMaxHeight: 24rem;
 
 .fullWidth {
-  width: 100%;
+  composes: fullWidth from global;
 }
 
 .wrapper {
@@ -21,6 +19,5 @@ $imgContainerMaxHeight: 24rem;
 }
 
 .price {
-  @extend .emphasizedText;
-  font-size: var(--fontSize_xl);
+  composes: emphasizedText_xl from global;
 }
