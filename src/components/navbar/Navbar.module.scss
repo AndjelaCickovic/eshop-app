@@ -1,5 +1,7 @@
 .navbar {
   position: sticky;
-  background-color: var(--secondaryColor);
-  color: var(--primaryColor);
+
+  button {
+    color: var(--primaryVeryLightColor);
+  }
 }

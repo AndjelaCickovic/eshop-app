@@ -1,9 +1,6 @@
 import { useCallback } from "react";
-import { useTranslation } from "react-i18next";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import {
   Card,
-  IconButton,
   CardMedia,
   CardContent,
   Typography,
@@ -11,9 +8,9 @@ import {
   Stack,
   CardActionArea,
 } from "@mui/material";
-import { Product } from "../../types";
+import { AddToCartButton } from "../add-to-cart-button/AddToCartButton";
 import { LocalizedNumber } from "../localized-number/LocalizedNumber";
-import { useCart } from "../../contexts";
+import { Product } from "../../types";
 import styles from "./ProductCard.module.scss";
 
 interface ProductCardProps {
@@ -24,9 +21,6 @@ interface ProductCardProps {
 export default function ProductCard(props: Readonly<ProductCardProps>) {
   const { product, onClick } = props;
 
-  const { t } = useTranslation();
-  const { addToCart } = useCart();
-
   const handleCardClick = useCallback(
     (_event: React.MouseEvent<HTMLDivElement>) => {
       onClick(product.id);
@@ -34,17 +28,9 @@ export default function ProductCard(props: Readonly<ProductCardProps>) {
     [onClick, product.id]
   );
 
-  const handleAddToCartClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.stopPropagation();
-      addToCart(product);
-    },
-    [addToCart, product]
-  );
-
   return (
     <Card className={styles.productCard} onClick={handleCardClick}>
-      <CardActionArea disableTouchRipple>
+      <CardActionArea disableTouchRipple className={styles.actionArea}>
         <CardMedia
           component="img"
           className={styles.img}
@@ -55,12 +41,7 @@ export default function ProductCard(props: Readonly<ProductCardProps>) {
           <Typography gutterBottom variant="h5">
             {product.name}
           </Typography>
-          <Typography
-            variant="subtitle1"
-            textOverflow={"ellipsis"}
-            overflow={"hidden"}
-            whiteSpace={"nowrap"}
-          >
+          <Typography variant="subtitle1" className={styles.clampedText}>
             {product.description}
           </Typography>
         </CardContent>
@@ -74,17 +55,10 @@ export default function ProductCard(props: Readonly<ProductCardProps>) {
           >
             <LocalizedNumber
               formatStyle="currency"
-              value={product?.price}
+              value={product.price}
               className={styles.price}
             ></LocalizedNumber>
-            <IconButton
-              aria-label={t("shoppingCart.addBtn")}
-              title={t("shoppingCart.addBtn")}
-              color="primary"
-              onClick={handleAddToCartClick}
-            >
-              <AddShoppingCartIcon />
-            </IconButton>
+            <AddToCartButton productId={product.id}></AddToCartButton>
           </Stack>
         </CardActions>
       </CardActionArea>

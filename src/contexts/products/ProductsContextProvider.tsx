@@ -1,44 +1,41 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import productService from "../../services/product.service";
 import { Product } from "../../types";
-import { IProductsContext, ProductsContext } from "..";
+import { IProductsContext, ProductsContext } from "../products/ProductsContext";
+import { toast } from "react-toastify";
+import { IErrorResponse } from "../../services/http.service";
 
 export default function ProductsProvider(
   props: Readonly<React.PropsWithChildren>
 ) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<string>();
+
+  const initialized = useRef(false);
 
   useEffect(() => {
-    let isBackendApiCall = true;
-    setLoading(true);
+    if (!initialized.current) {
+      initialized.current = true;
+      setLoading(true);
 
-    const timeoutId = setTimeout(() => {
       productService
         .getProducts()
         .then((data) => {
-          if (isBackendApiCall) {
-            setProducts(data);
-            setLoading(false);
-            isBackendApiCall = false;
-          }
-        })
-        .catch(() => {
+          setProducts(data);
           setLoading(false);
-          setError(true);
-          isBackendApiCall = false;
+        })
+        .catch((error: IErrorResponse) => {
+          toast.error(error.message);
+          setError(error.message);
+          setLoading(false);
         });
-    }, 10000);
-
-    // Cleanup function to clear the timeout if the component unmounts
-
-    return () => clearTimeout(timeoutId);
+    }
   }, []);
 
   const productsValue: IProductsContext = useMemo(() => {
-    return { products, loading };
-  }, [products, loading]);
+    return { products, loading, error };
+  }, [products, loading, error]);
 
   return (
     <ProductsContext.Provider value={productsValue}>

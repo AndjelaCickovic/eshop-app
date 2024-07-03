@@ -16,7 +16,7 @@ export interface IGenericOptions {
 }
 
 export interface IErrorResponse {
-  status: string;
+  status: number;
   message: string;
 }
 
@@ -29,25 +29,34 @@ const injectInterceptors = (): void => {
   axiosService.interceptors.response.use(
     (response) => response,
 
-    (error: AxiosError) => {
-      //TODO: Error handling
-      // Add method to check errors and toast error from component
+    (error: AxiosError): Promise<IErrorResponse> => {
       const { status } = error.response!;
+
+      let response: IErrorResponse = { message: "", status: status };
       switch (status) {
         case 400:
-          console.error(error.response);
+          response.message =
+            "There was an issue with your request. Please check and try again.";
           break;
         case 401:
-          console.error("Unauthorized");
+          response.message =
+            "You are not authorized. Please log in and try again.";
+          break;
+        case 403:
+          response.message =
+            "You do not have permission to access this resource.";
           break;
         case 404:
-          console.error(error.response?.status);
+          response.message = "The requested resource was not found.";
           break;
         case 500:
-          console.error("server error");
+          response.message =
+            "The server encountered an error. Please try again later.";
           break;
         default:
-          console.error("an unknown error occurred");
+          response.message =
+            error.response?.data?.toString() ||
+            "An unexpected error occurred. Please try again later.";
           break;
       }
       return Promise.reject(error);

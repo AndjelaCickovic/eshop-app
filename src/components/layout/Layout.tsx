@@ -1,18 +1,32 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { Grid, ThemeProvider } from "@mui/material";
 import { baseTheme } from "../../themes/base-theme";
 import { Navbar } from "../navbar/Navbar";
-import { ShoppingCart } from "../shopping-cart/ShoppingCart";
-import { ShoppingCartProvider } from "../../contexts";
-import styles from "./Layout.module.scss";
 import ProductsProvider from "../../contexts/products/ProductsContextProvider";
+import { LoadingSpinner } from "../loading-spinner/LoadingSpinner";
+import ShoppingCartProvider from "../../contexts/shopping-cart/ShoppingCartProvider";
+import "react-toastify/dist/ReactToastify.css";
+import styles from "./Layout.module.scss";
 
 export default function Layout() {
   return (
     <ThemeProvider theme={baseTheme}>
       <ProductsProvider>
         <ShoppingCartProvider>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
           <Navbar />
           <main>
             <Grid
@@ -22,15 +36,14 @@ export default function Layout() {
               alignItems={"center"}
               justifyContent={"center"}
             >
-              {/* TODO Loading component */}
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<LoadingSpinner />}>
                 <Outlet />
               </Suspense>
             </Grid>
           </main>
-          <ShoppingCart />
         </ShoppingCartProvider>
       </ProductsProvider>
+
       {/* TODO Add footer*/}
     </ThemeProvider>
   );

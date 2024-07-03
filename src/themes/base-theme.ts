@@ -36,12 +36,15 @@ const baseThemeOptions: ThemeOptions = {
     },
     h4: {
       color: theme.primaryTextColor,
+      fontSize: theme.fontSize_xl,
     },
     h5: {
       color: theme.primaryTextColor,
+      fontSize: theme.fontSize_lg,
     },
     h6: {
       color: theme.primaryTextColor,
+      fontSize: theme.fontSize_md,
     },
     subtitle1: {
       color: theme.secondaryTextColor,

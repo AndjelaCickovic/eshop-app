@@ -1,12 +1,12 @@
 import { createContext, useContext } from "react";
-import { CartItem, Product } from "../../types";
+import { CartItem } from "../../types";
 
 export interface IShoppingCartContext {
   cartItems: CartItem[];
   itemsTotalCount: number;
-  addToCart: (product: Product, quantity?: number) => void;
-  removeFromCart: (productId: number) => void;
-  updateCartItemQuantity: (productId: number, quantity: number) => void;
+  addToCart: (id: number, quantity?: number) => void;
+  removeFromCart: (id: number) => void;
+  updateCartItemQuantity: (id: number, quantity: number) => void;
   clearCart: () => void;
 }
 

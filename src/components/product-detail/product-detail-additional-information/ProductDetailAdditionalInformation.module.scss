@@ -1,0 +1,17 @@
+.fullWidth {
+  width: 100%;
+}
+
+.primaryIcon {
+  color: var(--primaryColor);
+}
+
+.bolderText {
+  font-weight: var(--fontWeight_semiBold);
+  font-size: var(--fontSize_sm);
+}
+
+.indentedList {
+  margin-top: var(--margin_sm);
+  padding-left: 32px;
+}

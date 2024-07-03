@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
-import { useProducts } from "../../contexts";
+import { ProductCardSkeleton } from "../../components/product-card/product-card-skeleton/ProductCardSkeleton";
+import { useProducts } from "../../contexts/products/ProductsContext";
 import ProductCard from "../../components/product-card/ProductCard";
 import PathConstants from "../../routes/path-constants";
 import styles from "./Products.module.scss";
-import { ProductCardSkeleton } from "../../components/product-card/product-card-skeleton/ProductCardSkeleton";
 
 export default function Products() {
   const { products, loading } = useProducts();

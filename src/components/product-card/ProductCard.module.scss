@@ -1,23 +1,30 @@
 @import "../../styles/global.scss";
 
-$cardMinWidth: 150px;
-$cardMaxWidth: 350px;
-$imgHeight: 180px;
+$cardMinWidth: 9.375rem;
+$cardMaxWidth: 21.875rem;
+$imgHeight: 11.25rem;
 
 .productCard {
   max-width: $cardMaxWidth;
   min-width: $cardMinWidth;
 }
 
-.img {
-  height: $imgHeight;
-  object-fit: contain; //TODO
+.MuiCardMedia-root {
+  object-fit: contain;
+}
+
+.actionArea {
+  padding: 1rem;
+  img {
+    height: $imgHeight;
+    object-fit: contain; //TODO
+  }
 }
 
 .price {
   @extend .emphasizedText;
 }
 
-.MuiCardMedia-root {
-  object-fit: contain;
+.clampedText {
+  @include clamp-text(2);
 }

@@ -15,8 +15,9 @@ export const theme: ITheme = {
   /**Font sizes */
   fontSize_sm: "0.9rem",
   fontSize_md: "1rem",
-  fontSize_lg: "1.5rem",
-  fontSize_xl: "2rem",
+  fontSize_lg: "1.2rem",
+  fontSize_xl: "1.5rem",
+  fontSize_xxl: "2rem",
   fontWeight_normal: 400,
   fontWeight_semiBold: 600,
   fontWeight_bold: 700,
@@ -59,6 +60,7 @@ interface ITheme {
   fontSize_md: string;
   fontSize_lg: string;
   fontSize_xl: string;
+  fontSize_xxl: string;
 
   fontWeight_normal: number;
   fontWeight_semiBold: number;

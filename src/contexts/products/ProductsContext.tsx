@@ -4,6 +4,7 @@ import { Product } from "../../types";
 export interface IProductsContext {
   products: Product[];
   loading: boolean;
+  error?: string;
 }
 
 export const ProductsContext = createContext<IProductsContext>({

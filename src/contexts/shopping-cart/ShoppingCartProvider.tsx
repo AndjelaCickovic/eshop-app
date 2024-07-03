@@ -1,16 +1,18 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import ShoppingCartContext, {
   IShoppingCartContext,
 } from "./ShoppingCartContext";
-import { CartItem, Product } from "../../types";
+import { CartItem } from "../../types";
 import CartDrawerContext from "./ShoppingCartDrawerContext";
-import shoppingCartService from "../../services/shopping-cart.service";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { ShoppingCart } from "../../components/shopping-cart/ShoppingCart";
 
 export function ShoppingCartProvider(props: Readonly<React.PropsWithChildren>) {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [cartLoaded, setCartLoaded] = useState(false);
+  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
+    "shopping-cart",
+    []
+  );
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isClearCartRequested, setIsClearCartRequested] = useState(false);
 
   const itemsTotalCount = useMemo(() => {
     return cartItems.reduce((prev, curr) => {
@@ -18,43 +20,36 @@ export function ShoppingCartProvider(props: Readonly<React.PropsWithChildren>) {
     }, 0);
   }, [cartItems]);
 
-  useEffect(() => {
-    setCartItems(shoppingCartService.getItems());
-  }, []);
+  const addToCart = useCallback(
+    (id: number, quantity?: number) => {
+      setCartItems((prevCartItems) => {
+        const existingItem = prevCartItems.find((item) => item.id === id);
 
-  useEffect(() => {
-    shoppingCartService.updateCart(cartItems);
-  }, [cartItems]);
-
-  const addToCart = (product: Product, quantity?: number) => {
-    setCartItems((prevCartItems) => {
-      const existingItem = prevCartItems.find(
-        (item) => item.product.id === product.id
-      );
-
-      if (existingItem) {
-        return prevCartItems.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quantity: item.quantity + (quantity ?? 1) }
-            : item
-        );
-      } else {
-        return [...prevCartItems, { product, quantity: quantity ?? 1 }];
-      }
-    });
-  };
+        if (existingItem) {
+          return prevCartItems.map((item) =>
+            item.id === id
+              ? { ...item, quantity: item.quantity + (quantity ?? 1) }
+              : item
+          );
+        } else {
+          return [...prevCartItems, { id, quantity: quantity ?? 1 }];
+        }
+      });
+    },
+    [setCartItems]
+  );
 
   const removeFromCart = useCallback(
     (productId: number) => {
-      setCartItems(cartItems.filter((item) => item.product.id !== productId));
+      setCartItems(cartItems.filter((item) => item.id !== productId));
     },
-    [cartItems]
+    [cartItems, setCartItems]
   );
 
   const updateCartItemQuantity = useCallback(
     (productId: number, quantity: number) => {
       const existingCartItemIndex = cartItems.findIndex(
-        (item) => item.product.id === productId
+        (item) => item.id === productId
       );
 
       if (existingCartItemIndex >= 0) {
@@ -63,12 +58,12 @@ export function ShoppingCartProvider(props: Readonly<React.PropsWithChildren>) {
         setCartItems(updatedCartItems);
       }
     },
-    [cartItems]
+    [cartItems, setCartItems]
   );
 
   const clearCart = useCallback(() => {
-    setIsClearCartRequested(true);
-  }, []);
+    setCartItems([]);
+  }, [setCartItems]);
 
   const openCart = useCallback(() => {
     setIsCartOpen(true);
@@ -96,6 +91,7 @@ export function ShoppingCartProvider(props: Readonly<React.PropsWithChildren>) {
       itemsTotalCount: itemsTotalCount,
     };
   }, [
+    addToCart,
     cartItems,
     clearCart,
     itemsTotalCount,
@@ -107,6 +103,7 @@ export function ShoppingCartProvider(props: Readonly<React.PropsWithChildren>) {
     <ShoppingCartContext.Provider value={shoppingCartContextValue}>
       <CartDrawerContext.Provider value={cartDrawerContextValue}>
         {props.children}
+        <ShoppingCart />
       </CartDrawerContext.Provider>
     </ShoppingCartContext.Provider>
   );

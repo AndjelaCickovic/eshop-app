@@ -10,22 +10,25 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useCart, useCartDrawer } from "../../contexts";
+import { useCartDrawer } from "../../contexts/shopping-cart/ShoppingCartDrawerContext";
+import { useCart } from "../../contexts/shopping-cart/ShoppingCartContext";
 import { LocalizedNumber } from "../localized-number/LocalizedNumber";
-import { ShoppingCartItem } from "../shopping-cart-item/ShoppingCartItem";
+import { ShoppingCartItem } from "./shopping-cart-item/ShoppingCartItem";
+import { useProducts } from "../../contexts/products/ProductsContext";
 import styles from "./ShoppingCart.module.scss";
 
 export function ShoppingCart() {
   const { isCartOpen, closeCart } = useCartDrawer();
   const { cartItems } = useCart();
+  const { products } = useProducts();
   const { t } = useTranslation();
 
   const subtotal: number = useMemo(() => {
-    return cartItems.reduce(
-      (total, item) => total + item.product.price * item.quantity,
-      0
-    );
-  }, [cartItems]);
+    return cartItems.reduce((total, cartItem) => {
+      const item = products.find((p) => p.id === cartItem.id);
+      return total + (item?.price ?? 0) * cartItem.quantity;
+    }, 0);
+  }, [cartItems, products]);
 
   return (
     <Drawer open={isCartOpen} anchor="right" onClose={closeCart}>
@@ -50,10 +53,7 @@ export function ShoppingCart() {
           {cartItems.length > 0 && (
             <>
               {cartItems.map((item) => (
-                <ShoppingCartItem
-                  item={item}
-                  key={item.product.id}
-                ></ShoppingCartItem>
+                <ShoppingCartItem item={item} key={item.id}></ShoppingCartItem>
               ))}
               <Stack direction={"row"} gap={1}>
                 <Typography>

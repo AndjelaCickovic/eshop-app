@@ -1,9 +1,9 @@
-import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { IconButton, Input, Stack } from "@mui/material";
-import styles from "./quantity-input.module.scss";
+import styles from "./QuantityInput.module.scss";
 
 export interface QuantityInputProps {
   /**
@@ -15,7 +15,7 @@ export interface QuantityInputProps {
    */
   min?: number;
   max?: number;
-  onChange?: (value: number) => void;
+  onChange?: (e: React.ChangeEvent | React.MouseEvent, value: number) => void;
 }
 
 export default function QuantityInput(props: Readonly<QuantityInputProps>) {
@@ -33,29 +33,35 @@ export default function QuantityInput(props: Readonly<QuantityInputProps>) {
   );
 
   const updateValue = useCallback(
-    (newValue: number) => {
+    (e: React.ChangeEvent | React.MouseEvent, newValue: number) => {
       if (valueMatchesBounds(newValue)) {
         setQuantity(newValue);
-        onChange?.(newValue);
+        onChange?.(e, newValue);
       }
     },
     [onChange, valueMatchesBounds]
   );
 
   const handleChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      updateValue(+e.target.value);
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      updateValue(e, +e.target.value);
     },
     [updateValue]
   );
 
-  const handleIncrement = useCallback(() => {
-    updateValue(quantity + 1);
-  }, [updateValue, quantity]);
+  const handleIncrement = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      updateValue(e, quantity + 1);
+    },
+    [updateValue, quantity]
+  );
 
-  const handleDecrement = useCallback(() => {
-    updateValue(quantity - 1);
-  }, [updateValue, quantity]);
+  const handleDecrement = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      updateValue(e, quantity - 1);
+    },
+    [updateValue, quantity]
+  );
 
   const decreaseBtn = useMemo(() => {
     return (

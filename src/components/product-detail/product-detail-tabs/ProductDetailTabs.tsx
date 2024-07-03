@@ -59,7 +59,10 @@ export default function ProductDetailTabs(
     <Box className={styles.fullWidth}>
       <TabContext value={value}>
         <Box className={styles.headingBox}>
-          <TabList onChange={handleChange} centered={isSmOrMd}>
+          <TabList
+            onChange={handleChange}
+            orientation={isSmOrMd ? "vertical" : "horizontal"}
+          >
             <Tab
               label={t("products.features")}
               value={ProductDetailsTab.Features}

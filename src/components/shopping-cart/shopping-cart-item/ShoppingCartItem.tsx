@@ -1,11 +1,12 @@
-import { MouseEvent, useCallback } from "react";
+import { MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { CartItem } from "../../types";
-import { useCart } from "../../contexts";
-import QuantityInput from "../quantity-input/QuantityInput";
-import { LocalizedNumber } from "../localized-number/LocalizedNumber";
+import { CartItem } from "../../../types";
+import { LocalizedNumber } from "../../localized-number/LocalizedNumber";
+import { useProducts } from "../../../contexts/products/ProductsContext";
+import { useCart } from "../../../contexts/shopping-cart/ShoppingCartContext";
+import QuantityInput from "../../quantity-input/QuantityInput";
 import styles from "./ShoppingCartItem.module.scss";
 
 interface IShoppingCartItemProps {
@@ -15,22 +16,24 @@ interface IShoppingCartItemProps {
 export function ShoppingCartItem(props: Readonly<IShoppingCartItemProps>) {
   const { item } = props;
 
+  const { products } = useProducts();
   const { t } = useTranslation();
   const { removeFromCart, updateCartItemQuantity } = useCart();
 
-  const handleQuantityChange = useCallback(
-    (value: number) => {
-      updateCartItemQuantity(item.product.id, value);
-    },
-    [item.product.id, updateCartItemQuantity]
-  );
+  const product = products.find((p) => p.id === item.id);
 
-  const handleDeleteClick = useCallback(
-    (_e: MouseEvent<HTMLButtonElement>) => {
-      removeFromCart(item.product.id);
-    },
-    [item.product.id, removeFromCart]
-  );
+  if (!product) return <></>;
+
+  const handleQuantityChange = (
+    _e: React.ChangeEvent | React.MouseEvent,
+    value: number
+  ) => {
+    updateCartItemQuantity(product.id, value);
+  };
+
+  const handleDeleteClick = (_e: MouseEvent<HTMLButtonElement>) => {
+    removeFromCart(product.id);
+  };
 
   return (
     <Stack
@@ -45,8 +48,8 @@ export function ShoppingCartItem(props: Readonly<IShoppingCartItemProps>) {
         src="https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
       />
       <Box display={"flex"} flexDirection={"column"} flexGrow={1}>
-        <Typography>{item.product.name}</Typography>
-        <LocalizedNumber value={item.product.price} formatStyle="currency" />
+        <Typography>{product?.name}</Typography>
+        <LocalizedNumber value={product?.price} formatStyle="currency" />
       </Box>
       <QuantityInput
         initialValue={item.quantity}

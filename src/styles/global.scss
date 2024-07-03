@@ -12,3 +12,12 @@
   font-weight: var(--fontWeight_bold);
   color: var(--primaryColor);
 }
+
+@mixin clamp-text($linesCount: 2) {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: normal;
+  -webkit-line-clamp: $linesCount;
+}

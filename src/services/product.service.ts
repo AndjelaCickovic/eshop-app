@@ -1,7 +1,7 @@
 import { Product } from "../types";
 import { httpGet } from "./http.service";
 
-const apiEndpoint: string = "";
+const apiEndpoint: string = "/sth/";
 
 const productService = {
   async getProducts(): Promise<Product[]> {
