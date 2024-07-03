@@ -5,7 +5,8 @@
     "emptyCartText": "No items found in shopping cart.",
     "totalLabel": "Total",
     "removeBtn_one": "Remove item from cart",
-    "removeBtn_other": "Remove items from cart"
+    "removeBtn_other": "Remove items from cart",
+    "removeItemConfirmationMessage": "Are you sure you want to remove this product from cart?"
   },
 
   "products": {
@@ -22,6 +23,8 @@
   },
 
   "shared": {
-    "loading": "Loading"
+    "loading": "Loading",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   }
 }

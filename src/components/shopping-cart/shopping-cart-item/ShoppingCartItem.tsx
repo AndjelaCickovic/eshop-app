@@ -4,7 +4,7 @@ import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { CartItem } from "../../../types";
 import { LocalizedNumber } from "../../localized-number/LocalizedNumber";
-import { useProducts, useCart } from "../../../contexts";
+import { useProducts, useCart, useConfirmationDialog } from "../../../contexts";
 import QuantityInput from "../../quantity-input/QuantityInput";
 import styles from "./ShoppingCartItem.module.scss";
 
@@ -18,6 +18,7 @@ export function ShoppingCartItem(props: Readonly<IShoppingCartItemProps>) {
   const { products } = useProducts();
   const { t } = useTranslation();
   const { removeFromCart, updateCartItemQuantity } = useCart();
+  const { confirm } = useConfirmationDialog();
 
   const product = products.find((p) => p.id === item.id);
 
@@ -31,7 +32,9 @@ export function ShoppingCartItem(props: Readonly<IShoppingCartItemProps>) {
   };
 
   const handleDeleteClick = (_e: MouseEvent<HTMLButtonElement>) => {
-    removeFromCart(product.id);
+    confirm(t("shoppingCart.removeItemConfirmationMessage"), () => {
+      removeFromCart(product.id);
+    });
   };
 
   return (
