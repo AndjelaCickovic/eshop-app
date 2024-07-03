@@ -30,7 +30,11 @@ export function ProductCard(props: Readonly<ProductCardProps>) {
 
   return (
     <Card className={styles.productCard} onClick={handleCardClick}>
-      <CardActionArea disableTouchRipple className={styles.actionArea}>
+      <CardActionArea
+        disableTouchRipple
+        className={styles.actionArea}
+        component="div"
+      >
         <CardMedia
           component="img"
           className={styles.img}
