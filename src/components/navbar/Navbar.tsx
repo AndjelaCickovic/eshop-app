@@ -1,10 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { ShoppingCart } from "@mui/icons-material";
 import { AppBar, Badge, Box, IconButton, Toolbar } from "@mui/material";
-import PathConstants from "../../routes/path-constants";
-import { useProducts } from "../../contexts/products/ProductsContext";
-import { useCartDrawer } from "../../contexts/shopping-cart/ShoppingCartDrawerContext";
-import { useCart } from "../../contexts/shopping-cart/ShoppingCartContext";
+import { useProducts, useCartDrawer, useCart } from "../../contexts";
+import { PathConstants } from "../../routes";
 import Link from "../link/Link";
 import styles from "./Navbar.module.scss";
 import { useMemo } from "react";
@@ -45,3 +43,5 @@ export function Navbar() {
     </AppBar>
   );
 }
+
+export default Navbar;

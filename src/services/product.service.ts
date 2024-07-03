@@ -1,4 +1,4 @@
-import { Product } from "../types";
+import { Product } from "../types/models/product";
 import { httpGet } from "./http.service";
 
 const apiEndpoint: string = "/sth/";

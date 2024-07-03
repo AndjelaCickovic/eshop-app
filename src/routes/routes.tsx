@@ -1,7 +1,7 @@
-import PathConstants from "./path-constants";
+import { PathConstants } from "./path-constants";
 import Products from "../pages/products/Products";
 import { RouteObject } from "react-router-dom";
-import ProductDetail from "../components/product-detail/ProductDetail";
+import { ProductDetail } from "../components";
 
 const routes: RouteObject[] = [
   {

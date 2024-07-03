@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, Skeleton, CardContent } from "@mui/material";
 import styles from "./ProductCardSkeleton.module.scss";
 
@@ -19,3 +18,5 @@ export function ProductCardSkeleton() {
     </Card>
   );
 }
+
+export default ProductCardSkeleton;

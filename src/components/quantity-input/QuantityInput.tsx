@@ -5,7 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { IconButton, Input, Stack } from "@mui/material";
 import styles from "./QuantityInput.module.scss";
 
-export interface QuantityInputProps {
+interface QuantityInputProps {
   /**
    * @default 0
    */
@@ -18,7 +18,7 @@ export interface QuantityInputProps {
   onChange?: (e: React.ChangeEvent | React.MouseEvent, value: number) => void;
 }
 
-export default function QuantityInput(props: Readonly<QuantityInputProps>) {
+export function QuantityInput(props: Readonly<QuantityInputProps>) {
   const { initialValue = 1, min = 1, max, onChange } = props;
 
   const [quantity, setQuantity] = useState<number>(initialValue);
@@ -103,3 +103,5 @@ export default function QuantityInput(props: Readonly<QuantityInputProps>) {
     </Stack>
   );
 }
+
+export default QuantityInput;

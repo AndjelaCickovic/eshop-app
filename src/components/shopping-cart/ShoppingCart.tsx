@@ -10,11 +10,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useCartDrawer } from "../../contexts/shopping-cart/ShoppingCartDrawerContext";
-import { useCart } from "../../contexts/shopping-cart/ShoppingCartContext";
+import { useCartDrawer, useCart, useProducts } from "../../contexts";
 import { LocalizedNumber } from "../localized-number/LocalizedNumber";
 import { ShoppingCartItem } from "./shopping-cart-item/ShoppingCartItem";
-import { useProducts } from "../../contexts/products/ProductsContext";
 import styles from "./ShoppingCart.module.scss";
 
 export function ShoppingCart() {
@@ -81,3 +79,5 @@ export function ShoppingCart() {
     </Drawer>
   );
 }
+
+export default ShoppingCart;

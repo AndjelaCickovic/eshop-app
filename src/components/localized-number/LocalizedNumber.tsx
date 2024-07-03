@@ -5,7 +5,7 @@ import i18next from "i18next";
  * style is omitted from Intl.NumberFormatOptions and renamed to formatStyle to prevent a clash with the
  * BaseHTMLAttributes "style" (which would be the CSS style object). Default currency is USD.
  */
-export interface LocalizedNumberProps
+interface LocalizedNumberProps
   extends BaseHTMLAttributes<HTMLSpanElement>,
     Omit<Intl.NumberFormatOptions, "style"> {
   formatStyle?: string;
@@ -52,3 +52,5 @@ export function LocalizedNumber(props: Readonly<LocalizedNumberProps>) {
     </span>
   );
 }
+
+export default LocalizedNumber;

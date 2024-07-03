@@ -15,7 +15,7 @@ interface ProductDetailAdditionalInformationProps {
   additionalInformation: AdditionalInformation;
 }
 
-export default function ProductDetailAdditionalInformation(
+export function ProductDetailAdditionalInformation(
   props: Readonly<ProductDetailAdditionalInformationProps>
 ) {
   const { additionalInformation } = props;
@@ -76,3 +76,5 @@ export default function ProductDetailAdditionalInformation(
     </List>
   );
 }
+
+export default ProductDetailAdditionalInformation;

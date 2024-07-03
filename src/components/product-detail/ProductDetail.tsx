@@ -1,16 +1,16 @@
 import { useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Divider, Grid, Stack, Typography } from "@mui/material";
-import PathConstants from "../../routes/path-constants";
+import { PathConstants } from "../../routes/path-constants";
 import { LocalizedNumber } from "../localized-number/LocalizedNumber";
 import ProductDetailTabs from "./product-detail-tabs/ProductDetailTabs";
 import { LoadingSpinner } from "../loading-spinner/LoadingSpinner";
 import { AddToCartButton } from "../add-to-cart-button/AddToCartButton";
-import { useProducts } from "../../contexts/products/ProductsContext";
+import { useProducts } from "../../contexts";
 import ProductDetailAdditionalInformation from "./product-detail-additional-information/ProductDetailAdditionalInformation";
 import styles from "./ProductDetail.module.scss";
 
-export default function ProductDetail() {
+export function ProductDetail() {
   const { products, loading } = useProducts();
   const { productId } = useParams();
   const navigate = useNavigate();
@@ -96,3 +96,5 @@ export default function ProductDetail() {
     </Grid>
   );
 }
+
+export default ProductDetail;

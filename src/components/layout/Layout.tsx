@@ -4,13 +4,12 @@ import { ToastContainer } from "react-toastify";
 import { Grid, ThemeProvider } from "@mui/material";
 import { baseTheme } from "../../themes/base-theme";
 import { Navbar } from "../navbar/Navbar";
-import ProductsProvider from "../../contexts/products/ProductsContextProvider";
+import { ProductsProvider, ShoppingCartProvider } from "../../contexts";
 import { LoadingSpinner } from "../loading-spinner/LoadingSpinner";
-import ShoppingCartProvider from "../../contexts/shopping-cart/ShoppingCartProvider";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./Layout.module.scss";
 
-export default function Layout() {
+export function Layout() {
   return (
     <ThemeProvider theme={baseTheme}>
       <ProductsProvider>
@@ -48,3 +47,5 @@ export default function Layout() {
     </ThemeProvider>
   );
 }
+
+export default Layout;

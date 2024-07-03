@@ -10,3 +10,5 @@ export function LoadingSpinner() {
     </Box>
   );
 }
+
+export default LoadingSpinner;

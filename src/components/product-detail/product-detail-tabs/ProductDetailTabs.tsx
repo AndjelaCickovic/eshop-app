@@ -25,16 +25,13 @@ export enum ProductDetailsTab {
   AdditionalInformation = "additionalInformation",
   Features = "features",
 }
-
-export interface ProductDetailTabsProps {
+interface ProductDetailTabsProps {
   specifications?: Record<string, SpecificationValue>;
   features?: string[];
   defaultTab?: ProductDetailsTab;
 }
 
-export default function ProductDetailTabs(
-  props: Readonly<ProductDetailTabsProps>
-) {
+export function ProductDetailTabs(props: Readonly<ProductDetailTabsProps>) {
   const {
     specifications,
     features,
@@ -105,3 +102,5 @@ export default function ProductDetailTabs(
     </Box>
   );
 }
+
+export default ProductDetailTabs;

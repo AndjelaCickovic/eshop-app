@@ -4,8 +4,7 @@ import { Avatar, Box, IconButton, Stack, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { CartItem } from "../../../types";
 import { LocalizedNumber } from "../../localized-number/LocalizedNumber";
-import { useProducts } from "../../../contexts/products/ProductsContext";
-import { useCart } from "../../../contexts/shopping-cart/ShoppingCartContext";
+import { useProducts, useCart } from "../../../contexts";
 import QuantityInput from "../../quantity-input/QuantityInput";
 import styles from "./ShoppingCartItem.module.scss";
 

@@ -7,10 +7,12 @@ export interface LinkProps {
   path: To;
 }
 
-export default function Link(props: Readonly<LinkProps>) {
+export function Link(props: Readonly<LinkProps>) {
   return (
     <RouterLink to={props.path} className={styles.link}>
       <Typography variant="h6">{props.text}</Typography>
     </RouterLink>
   );
 }
+
+export default Link;

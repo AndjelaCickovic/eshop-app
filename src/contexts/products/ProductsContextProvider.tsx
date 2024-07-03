@@ -5,9 +5,7 @@ import { IProductsContext, ProductsContext } from "../products/ProductsContext";
 import { toast } from "react-toastify";
 import { IErrorResponse } from "../../services/http.service";
 
-export default function ProductsProvider(
-  props: Readonly<React.PropsWithChildren>
-) {
+export function ProductsProvider(props: Readonly<React.PropsWithChildren>) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>();
@@ -43,3 +41,5 @@ export default function ProductsProvider(
     </ProductsContext.Provider>
   );
 }
+
+export default ProductsProvider;

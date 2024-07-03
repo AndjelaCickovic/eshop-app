@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { Button } from "@mui/material";
 import { t } from "i18next";
-import { useCart } from "../../contexts/shopping-cart/ShoppingCartContext";
+import { useCart } from "../../contexts";
 import QuantityInput from "../quantity-input/QuantityInput";
 
 interface AddToCartButtonProps {

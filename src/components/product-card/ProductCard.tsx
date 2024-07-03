@@ -18,7 +18,7 @@ interface ProductCardProps {
   onClick: (id: number) => void;
 }
 
-export default function ProductCard(props: Readonly<ProductCardProps>) {
+export function ProductCard(props: Readonly<ProductCardProps>) {
   const { product, onClick } = props;
 
   const handleCardClick = useCallback(
@@ -65,3 +65,5 @@ export default function ProductCard(props: Readonly<ProductCardProps>) {
     </Card>
   );
 }
+
+export default ProductCard;
