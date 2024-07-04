@@ -48,7 +48,7 @@ This application utilizes the Material UI library with pre-designed React compon
 
 ### SCSS Variables
 
-- [**variables.scss**](../eshop-app/src/styles/variables.scss): This file defines SCSS variables that are available at the root level. These variables can be used in other SCSS module files to ensure consistent styling.
+- [**variables.scss**](../eshop-app/src/styles/variables.scss): This file defines CSS variables that are available at the root level. These variables can be used in other CSS module files (_\*.module.scss_) to ensure consistent styling.
   TypeScript Variables:
 
 - [**variables.ts**](../eshop-app/src/styles/variables.ts) : This file defines variables in TypeScript that should be reused for setting themes for Material-UI components. By keeping theme-related variables here, we can ensure consistency between SCSS styles and Material-UI components.
