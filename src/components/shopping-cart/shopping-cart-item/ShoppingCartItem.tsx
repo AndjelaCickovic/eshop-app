@@ -6,6 +6,7 @@ import { CartItem } from "../../../types";
 import { LocalizedNumber } from "../../localized-number/LocalizedNumber";
 import { useProducts, useCart, useConfirmationDialog } from "../../../contexts";
 import QuantityInput from "../../quantity-input/QuantityInput";
+import placeholderImage from "../../../assets/images/placeholder-product-image.png";
 import styles from "./ShoppingCartItem.module.scss";
 
 interface IShoppingCartItemProps {
@@ -47,16 +48,24 @@ export function ShoppingCartItem(props: Readonly<IShoppingCartItemProps>) {
       <Avatar
         variant="square"
         className={styles.avatar}
-        src="https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
+        src={placeholderImage}
       />
-      <Box display={"flex"} flexDirection={"column"} flexGrow={1}>
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        flexGrow={1}
+        gap={0.5}
+        justifyContent={"center"}
+        alignItems={"left"}
+      >
         <Typography>{product?.name}</Typography>
-        <LocalizedNumber value={product?.price} formatStyle="currency" />
+        <QuantityInput
+          initialValue={item.quantity}
+          onChange={handleQuantityChange}
+          size="small"
+        />
       </Box>
-      <QuantityInput
-        initialValue={item.quantity}
-        onChange={handleQuantityChange}
-      />
+
       <IconButton
         edge="end"
         onClick={handleDeleteClick}
@@ -64,6 +73,11 @@ export function ShoppingCartItem(props: Readonly<IShoppingCartItemProps>) {
       >
         <DeleteIcon />
       </IconButton>
+      <LocalizedNumber
+        value={product?.price * item.quantity}
+        formatStyle="currency"
+        className={styles.price}
+      />
     </Stack>
   );
 }

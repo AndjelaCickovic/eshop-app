@@ -4,12 +4,17 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { IconButton, Input, Stack } from "@mui/material";
 import styles from "./QuantityInput.module.scss";
+import clsx from "clsx";
 
 interface QuantityInputProps {
   /**
    * @default 0
    */
   initialValue?: number;
+  /**
+   * @default 'md'
+   */
+  size?: "small" | "medium";
   /**
    * @default 0
    */
@@ -19,7 +24,7 @@ interface QuantityInputProps {
 }
 
 export function QuantityInput(props: Readonly<QuantityInputProps>) {
-  const { initialValue = 1, min = 1, max, onChange } = props;
+  const { initialValue = 1, min = 1, max, onChange, size = "medium" } = props;
 
   const [quantity, setQuantity] = useState<number>(initialValue);
 
@@ -66,14 +71,17 @@ export function QuantityInput(props: Readonly<QuantityInputProps>) {
   const decreaseBtn = useMemo(() => {
     return (
       <IconButton
+        size={size}
         onClick={handleDecrement}
         disabled={quantity === min}
         title={t("quantity.decreaseBtn")}
       >
-        <RemoveIcon className={styles.icon} />
+        <RemoveIcon
+          className={size === "small" ? styles.fontSmall : styles.fontMedium}
+        />
       </IconButton>
     );
-  }, [handleDecrement, min, quantity, t]);
+  }, [handleDecrement, min, quantity, size, t]);
 
   const increaseBtn = useMemo(() => {
     return (
@@ -81,11 +89,14 @@ export function QuantityInput(props: Readonly<QuantityInputProps>) {
         onClick={handleIncrement}
         disabled={quantity === max}
         title={t("quantity.increaseBtn")}
+        size={size}
       >
-        <AddIcon className={styles.icon} />
+        <AddIcon
+          className={size === "small" ? styles.fontSmall : styles.fontMedium}
+        />
       </IconButton>
     );
-  }, [handleIncrement, max, quantity, t]);
+  }, [handleIncrement, max, quantity, size, t]);
 
   return (
     <Stack direction={"row"} display={"flex"} alignItems={"center"}>
@@ -98,7 +109,10 @@ export function QuantityInput(props: Readonly<QuantityInputProps>) {
         endAdornment={increaseBtn}
         disableUnderline={true}
         inputProps={{ min: min, max: max }}
-        className={styles.quantityInput}
+        className={clsx(styles.quantityInput, {
+          [styles.fontSmall]: size === "small",
+          [styles.fontMedium]: size === "medium",
+        })}
       />
     </Stack>
   );

@@ -25,6 +25,8 @@ const baseThemeOptions: ThemeOptions = {
     fontWeightRegular: theme.fontWeight_normal,
     fontWeightMedium: theme.fontWeight_semiBold,
     fontWeightBold: theme.fontWeight_bold,
+    fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
     h1: {
       color: theme.primaryTextColor,
     },
@@ -73,6 +75,16 @@ const baseThemeOptions: ThemeOptions = {
     },
   },
   components: {
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          color: theme.primaryColor,
+          ":disabled": {
+            color: theme.disabledTextColor,
+          },
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {

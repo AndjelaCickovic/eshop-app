@@ -1,4 +1,11 @@
 .container {
   margin: var(--margin_lg);
-  margin-top: var(--margin_xl);
+  margin-top: var(--margin_lg);
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: var(--margin_md);
+    margin-top: var(--margin_sm);
+  }
 }

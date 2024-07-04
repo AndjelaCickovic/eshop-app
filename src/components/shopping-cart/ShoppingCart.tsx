@@ -30,12 +30,7 @@ export function ShoppingCart() {
 
   return (
     <Drawer open={isCartOpen} anchor="right" onClose={closeCart}>
-      <Stack
-        direction="column"
-        display={"flex"}
-        gap={2}
-        className={styles.container}
-      >
+      <Stack direction="column" display={"flex"} className={styles.container}>
         <Box>
           <Stack display={"flex"} direction={"row"} alignItems={"center"}>
             <Typography variant="h6" className={styles.title}>
@@ -50,14 +45,36 @@ export function ShoppingCart() {
         <Box className={styles.itemsContainer}>
           {cartItems.length > 0 && (
             <>
+              {/* <Stack> */}
               {cartItems.map((item) => (
                 <ShoppingCartItem item={item} key={item.id}></ShoppingCartItem>
               ))}
-              <Stack direction={"row"} gap={1}>
+              {/* </Stack> */}
+
+              <Divider />
+              <Stack direction={"row"} className={styles.textContainer}>
                 <Typography>
-                  {t("shoppingCart.totalLabel").concat(":")}
+                  {t("shoppingCart.subtotalLabel").concat(":")}
                 </Typography>
                 <LocalizedNumber value={subtotal} formatStyle="currency" />
+              </Stack>
+              <Stack direction={"row"} className={styles.textContainer}>
+                <Typography>
+                  {t("shoppingCart.shippingLabel").concat(":")}
+                </Typography>
+                <Typography>
+                  {t("shoppingCart.missingValuePlaceholder")}
+                </Typography>
+              </Stack>
+              <Stack direction={"row"} className={styles.textContainer}>
+                <Typography className={styles.bolderText}>
+                  {t("shoppingCart.totalLabel").concat(":")}
+                </Typography>
+                <LocalizedNumber
+                  value={subtotal}
+                  formatStyle="currency"
+                  className={styles.bolderText}
+                />
               </Stack>
             </>
           )}

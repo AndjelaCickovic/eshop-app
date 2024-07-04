@@ -11,6 +11,7 @@ import {
 import { AddToCartButton } from "../add-to-cart-button/AddToCartButton";
 import { LocalizedNumber } from "../localized-number/LocalizedNumber";
 import { Product } from "../../types";
+import placeholderImage from "../../assets/images/placeholder-product-image.png";
 import styles from "./ProductCard.module.scss";
 
 interface ProductCardProps {
@@ -38,7 +39,7 @@ export function ProductCard(props: Readonly<ProductCardProps>) {
         <CardMedia
           component="img"
           className={styles.img}
-          image="https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
+          src={placeholderImage}
           alt={props.product.name}
         />
         <CardContent>

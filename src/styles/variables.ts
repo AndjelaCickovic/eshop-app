@@ -28,6 +28,7 @@ export const theme: ITheme = {
   margin_xl: "8rem",
   margin_xxl: "12rem",
 
+  p_sm: "0.5rem",
   p_md: "1rem",
 
   /**Breakpoints */
@@ -78,6 +79,7 @@ interface ITheme {
   margin_xl: string;
   margin_xxl: string;
 
+  p_sm: string;
   p_md: string;
 
   xs: number;

@@ -40,10 +40,10 @@ export function ConfirmationDialog(props: Readonly<ConfirmationDialogProps>) {
       </DialogContent>
       <DialogActions>
         <DialogActions>
-          <Button onClick={handleCancel}>{t("shared.cancel")}</Button>
           <Button onClick={handleConfirm} variant="contained">
             {t("shared.confirm")}
           </Button>
+          <Button onClick={handleCancel}>{t("shared.cancel")}</Button>
         </DialogActions>
       </DialogActions>
     </Dialog>

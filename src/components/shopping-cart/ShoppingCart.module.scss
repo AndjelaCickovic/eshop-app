@@ -17,7 +17,17 @@ $drawerMinWidth: 30rem;
 
 .itemsContainer {
   @extend .fullHeight;
-  padding: var(--p_md);
+  padding: var(--p_sm);
+}
+
+.bolderText {
+  font-weight: var(--fontWeight_bold);
+}
+
+.textContainer {
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--margin_sm);
 }
 
 .cartIcon {

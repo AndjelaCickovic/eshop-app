@@ -1,30 +1,30 @@
 {
-  "shoppingCart": {
-    "title": "Shopping cart",
-    "addBtn": "Add to cart",
-    "emptyCartText": "No items found in shopping cart.",
-    "totalLabel": "Total",
-    "removeBtn_one": "Remove item from cart",
-    "removeBtn_other": "Remove items from cart",
-    "removeItemConfirmationMessage": "Are you sure you want to remove this product from cart?"
-  },
-
   "products": {
     "additionalInformation": "Additional information",
-    "specifications": "Specifications",
     "features": "Features",
-    "warranty": "Warranty",
-    "inTheBox": "In the box"
+    "inTheBox": "In the box",
+    "specifications": "Specifications",
+    "warranty": "Warranty"
   },
-
   "quantity": {
-    "increaseBtn": "Increase quantity",
-    "decreaseBtn": "Decrease quantity"
+    "decreaseBtn": "Decrease quantity",
+    "increaseBtn": "Increase quantity"
   },
-
   "shared": {
-    "loading": "Loading",
+    "cancel": "Cancel",
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "loading": "Loading"
+  },
+  "shoppingCart": {
+    "addBtn": "Add to cart",
+    "emptyCartText": "No items found in shopping cart.",
+    "missingValuePlaceholder": "--",
+    "removeBtn_one": "Remove item from cart",
+    "removeBtn_other": "Remove items from cart",
+    "removeItemConfirmationMessage": "Are you sure you want to remove this product from cart?",
+    "shippingLabel": "Shipping",
+    "subtotalLabel": "Subtotal",
+    "title": "Shopping cart",
+    "totalLabel": "Total"
   }
 }

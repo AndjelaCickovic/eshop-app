@@ -5,5 +5,12 @@ $avatarSize: 3.5rem;
 }
 
 .container {
-  padding: var(--p_md);
+  padding: var(--p_md) 0;
+}
+
+.price {
+  font-weight: var(--fontWeight_bold);
+  color: var(--secondaryColor);
+  width: 20%;
+  text-align: right;
 }

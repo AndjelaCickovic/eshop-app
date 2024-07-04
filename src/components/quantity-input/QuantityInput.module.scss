@@ -20,6 +20,11 @@ $inputBorderRadius: 2rem;
     -webkit-appearance: none;
   }
 }
-.icon {
+
+.fontSmall {
+  font-size: var(--fontSize_sm);
+}
+
+.fontMedium {
   font-size: var(--fontSize_md);
 }

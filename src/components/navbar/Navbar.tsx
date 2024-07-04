@@ -30,11 +30,7 @@ export function Navbar() {
             onClick={openCart}
             title={t("shoppingCart.title")}
           >
-            <Badge
-              badgeContent={itemsTotalCount}
-              color="secondary"
-              hidden={itemsTotalCount === 0}
-            >
+            <Badge badgeContent={itemsTotalCount} color="secondary">
               <ShoppingCart />
             </Badge>
           </IconButton>
