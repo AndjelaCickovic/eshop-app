@@ -60,7 +60,7 @@ To run this application locally, follow these steps:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/shop-application.git
+   git clone https://github.com/AndjelaCickovic/eshop-app.git
    cd eshop-app/src
    ```
 
